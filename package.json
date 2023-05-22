@@ -1,0 +1,14 @@
+{
+  "name": "leetcode-javascript-testing",
+  "version": "1.0.0",
+  "description": "tech test practice",
+  "main": "easy.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Nooka Coder",
+  "license": "none",
+  "dependencies": {
+    "jest": "^29.5.0"
+  }
+}

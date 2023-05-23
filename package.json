@@ -4,11 +4,11 @@
   "description": "tech test practice",
   "main": "easy.js",
   "scripts": {
-    "test": "jest"
+    "test": "mocha __tests__"
   },
   "author": "Nooka Coder",
   "license": "none",
-  "dependencies": {
-    "jest": "^29.5.0"
+  "devDependencies": {
+    "mocha": "^10.2.0"
   }
 }

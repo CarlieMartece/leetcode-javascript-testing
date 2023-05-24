@@ -11,13 +11,14 @@ exports.reverseInteger = (x) => {
     let isNeg = false;
     if (x < 0) isNeg = true;
     const arrX = x.toString().split('');
-    let revArr = [];
     if (isNeg) arrX.shift();
-    for (let i = 0; i < arrX.length; i++) {
-        revArr.unshift(arrX[i]);
+    const midPoint = Math.floor(arrX.length / 2) - 1;
+    for (let i = 0; i <= midPoint; i++) {
+        let j = arrX.length - 1 - i;
+        [arrX[i], arrX[j]] = [arrX[j], arrX[i]];
     }
-    if (isNeg) revArr.unshift('-');
-    const reversedX = Number(revArr.join(''));
+    if (isNeg) arrX.unshift('-');
+    const reversedX = Number(arrX.join(''));
     if (reversedX > 2 ** 31 || reversedX < 0 - (2 ** 31)) {
         return 0;
     }

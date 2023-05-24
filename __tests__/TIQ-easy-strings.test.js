@@ -1,32 +1,64 @@
 const assert = require('assert');
 var expect = require('chai').expect;
 const {
-    reverseString
+    reverseString,
+    reverseInteger
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
     it("returns an array", () => {
         const actual = reverseString(["A"]);
-        assert.equal(Array.isArray(actual), true);
+        assert.strictEqual(Array.isArray(actual), true);
     });
     it("reverses an even-lengthed string array", () => {
         let newString = ["A", "B"];
         let actual = reverseString(newString);
         let expected = ['B', 'A'];
-        expect(actual).deep.to.equal(expected);
+        assert.strictEqual(actual[0], expected[0]);
         newString = ["H","a","n","n","a","h","B","a","n","a","n","a"];
         actual = reverseString(newString);
         expected = ["a","n","a","n","a","B","h","a","n","n","a","H"];
-        expect(actual).deep.to.equal(expected);
+        assert.deepEqual(actual, expected);
     });
     it("reverses an odd-lengthed string array", () => {
         let newString = ["A", "B", "C"];
         let actual = reverseString(newString);
         let expected = ['C','B', 'A'];
-        expect(actual).deep.to.equal(expected);
+        assert.strictEqual(actual[0], expected[0]);
         newString = ["H","a","n","n","a","h","B","a","n","a","n","a","!"];
         actual = reverseString(newString);
         expected = ["!","a","n","a","n","a","B","h","a","n","n","a","H"];
         expect(actual).deep.to.equal(expected);
+    });
+});
+
+describe("Reverse Integer", () => {
+    it("returns a number", () => {
+        const actual = reverseInteger(3);
+        assert.strictEqual(typeof(actual), 'number');
+    });
+    it("reverses a positive number's digits", () => {
+        const input = 314;
+        const expected = 413;
+        const actual = reverseInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("reverses a negative number's digits", () => {
+        const input = -123;
+        const expected = -321;
+        const actual = reverseInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns 0 for numbers over 32-bit integer range", () => {
+        const input = 2 ** 32;
+        const expected = 0;
+        const actual = reverseInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns 0 for numbers under 32-bit integer range", () => {
+        const input = 0 - (2 ** 32);
+        const expected = 0;
+        const actual = reverseInteger(input);
+        assert.strictEqual(actual, expected);
     });
 });

@@ -24,3 +24,31 @@ exports.reverseInteger = (x) => {
     }
     return reversedX;
 };
+
+exports.firstUnique = (s) => {
+    // const sArray = s.split("");
+    // for (let i = 0; i < sArray.length; i++) {
+    //     let checkChar = sArray.splice(i, 1, 'checking');
+    //     if (sArray.indexOf(checkChar[0]) === -1) {
+    //         return i;
+    //     }
+    //     sArray.splice(i, 1, checkChar[0]);
+    // }
+    // return -1;
+    let countMap = {};
+    const sArray = s.split("");
+    for (let i = 0; i < sArray.length; i++) {
+        let char = sArray[i];
+        if (!countMap.hasOwnProperty(char)) {
+            countMap[char] = [i];
+        } else {
+            countMap[char].push(i);
+        }
+    }
+    for (char in countMap) {
+        if (countMap[char].length === 1) {
+            return countMap[char][0];
+        }
+    }
+    return -1;
+};

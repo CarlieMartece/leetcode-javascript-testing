@@ -2,7 +2,8 @@ const assert = require('assert');
 var expect = require('chai').expect;
 const {
     reverseString,
-    reverseInteger
+    reverseInteger,
+    firstUnique
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
@@ -59,6 +60,25 @@ describe("Reverse Integer", () => {
         const input = 0 - (2 ** 32);
         const expected = 0;
         const actual = reverseInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+});
+
+describe("First Unique Character in a String", () => {
+    it("returns a number", () => {
+        const actual = firstUnique("x");
+        assert.strictEqual(typeof(actual), 'number');
+    });
+    it("returns the index of a string's first repeating character", () => {
+        let input = "loveleetcode";
+        let expected = 2;
+        let actual = firstUnique(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns -1 if no unique character exists", () => {
+        let input = "aabb";
+        let expected = -1;
+        actual = firstUnique(input);
         assert.strictEqual(actual, expected);
     });
 });

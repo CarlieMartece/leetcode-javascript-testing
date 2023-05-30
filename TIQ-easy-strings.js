@@ -58,3 +58,15 @@ exports.validAnagram = (s, t) => {
     const tSort = t.split("").sort().join("");
     return sSort === tSort;
 };
+
+exports.validPalindrome = (s) => {
+    const charArr = s.toLowerCase().match(/[a-z0-9]/g);
+    if (!charArr || charArr.length <= 1) return true;
+    const midIndex = Math.floor((charArr.length - 1) / 2);
+    for (let i = midIndex; i >= 0; i--) {
+        let checkOne = i;
+        let checkTwo = charArr.length - 1 - i;
+        if (charArr[checkOne] !== charArr[checkTwo]) return false;
+    }
+    return true;
+};

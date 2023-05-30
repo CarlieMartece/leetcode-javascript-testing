@@ -4,7 +4,8 @@ const {
     reverseString,
     reverseInteger,
     firstUnique,
-    validAnagram
+    validAnagram,
+    validPalindrome
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
@@ -103,6 +104,33 @@ describe("Valid Anagram", () => {
         const inputT = "nagaram";
         const expected = true;
         const actual = validAnagram(inputS, inputT);
+        assert.strictEqual(actual, expected);
+    });
+});
+
+// A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+describe("Valid Palindrome", () => {
+    it("returns a boolean", () => {
+        const input = "x";
+        const actual = validPalindrome(input);
+        assert.strictEqual(typeof(actual), 'boolean');
+    });
+    it("returns true for a valid palindrome", () => {
+        const input = "A man, a plan, a canal: Panama";
+        const expected = true;
+        const actual = validPalindrome(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns false for an invalid palindrome", () => {
+        const input = "A man, a plant, a canal: Panama";
+        const expected = false;
+        const actual = validPalindrome(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns true for an empty string", () => {
+        const input = " ";
+        const expected = true;
+        const actual = validPalindrome(input);
         assert.strictEqual(actual, expected);
     });
 });

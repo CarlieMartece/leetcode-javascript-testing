@@ -3,7 +3,8 @@ var expect = require('chai').expect;
 const {
     reverseString,
     reverseInteger,
-    firstUnique
+    firstUnique,
+    validAnagram
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
@@ -70,15 +71,38 @@ describe("First Unique Character in a String", () => {
         assert.strictEqual(typeof(actual), 'number');
     });
     it("returns the index of a string's first repeating character", () => {
-        let input = "loveleetcode";
-        let expected = 2;
-        let actual = firstUnique(input);
+        const input = "loveleetcode";
+        const expected = 2;
+        const actual = firstUnique(input);
         assert.strictEqual(actual, expected);
     });
     it("returns -1 if no unique character exists", () => {
-        let input = "aabb";
-        let expected = -1;
-        actual = firstUnique(input);
+        const input = "aabb";
+        const expected = -1;
+        const actual = firstUnique(input);
+        assert.strictEqual(actual, expected);
+    });
+});
+
+describe("Valid Anagram", () => {
+    it("returns a boolean", () => {
+        const inputS = "x";
+        const inputT = "y";
+        const actual = validAnagram(inputS, inputT);
+        assert.strictEqual(typeof(actual), 'boolean');
+    });
+    it("returns false if strings are not valid anagrams", () => {
+        const inputS = "anatram";
+        const inputT = "nagaram";
+        const expected = false;
+        const actual = validAnagram(inputS, inputT);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns true if strings are valid anagrams", () => {
+        const inputS = "anagram";
+        const inputT = "nagaram";
+        const expected = true;
+        const actual = validAnagram(inputS, inputT);
         assert.strictEqual(actual, expected);
     });
 });

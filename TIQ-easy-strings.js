@@ -52,3 +52,9 @@ exports.firstUnique = (s) => {
     }
     return -1;
 };
+
+exports.validAnagram = (s, t) => {
+    const sSort = s.split("").sort().join("");
+    const tSort = t.split("").sort().join("");
+    return sSort === tSort;
+};

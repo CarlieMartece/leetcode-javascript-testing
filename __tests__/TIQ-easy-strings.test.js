@@ -5,7 +5,8 @@ const {
     reverseInteger,
     firstUnique,
     validAnagram,
-    validPalindrome
+    validPalindrome,
+    stringToInteger
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
@@ -133,4 +134,120 @@ describe("Valid Palindrome", () => {
         const actual = validPalindrome(input);
         assert.strictEqual(actual, expected);
     });
+});
+
+describe("String to Integer", () => {
+    it("returns a number", () => {
+        const input = "x";
+        const actual = stringToInteger(input);
+        assert.strictEqual(typeof(actual), 'number');
+    });
+    it("converts a string of numbers only", () => {
+        const input = "42";
+        const expected = 42;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("ignores leading whitespace", () => {
+        const input = "   42"
+        const expected = 42;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns negative number if minus sign is included", () => {
+        const input = "   -42";
+        const expected = -42;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns positive number if plus sign is included", () => {
+        const input = "   +42";
+        const expected = 42;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("ignores non-digit characters", () => {
+        const input = "3141 with words";
+        const expected = 3141;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("ignores the rest of the string after first non-digit character after digits", () => {
+        const input = "3141 with words 592";
+        const expected = 3141;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("clamps numbers above 32-bit signed integer range", () => {
+        const upperRange = 2 ** 31 + 1
+        const input = upperRange.toString();
+        const expected = 2 ** 31 - 1;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("clamps numbers below 32-bit signed integer range", () => {
+        const lowerRange = -1 - (2 ** 31);
+        const input = lowerRange.toString();
+        const expected = 0 - (2 ** 31);
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("ignores words that come before digits" , () => {
+        const input = "words and 987";
+        const expected = 0;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for minus symbols after first digit", () => {
+        const input = "314-159"
+        const expected = 314;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for plus symbols after first digit", () => {
+        const input = "314+159"
+        const expected = 314;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for decimal symbols", () => {
+        const input = "314.159"
+        const expected = 314.159;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for decimal symbols outside of digits", () => {
+        const input = ".314159"
+        const expected = 0;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for concurrent minus and plus signs", () => {
+        let input = "+-12";
+        let expected = 0;
+        let actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+        input = "+1-2";
+        expected = 1;
+        actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("ignores whitespace after digits", () => {
+        let input = "   +3 141";
+        let expected = 3;
+        let actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for plus symbols between whitespace", () => {
+        const input = "  +  415"
+        const expected = 0;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("accounts for multiple plus spaces", () => {
+        const input = " ++1";
+        const expected = 0;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    })
 });

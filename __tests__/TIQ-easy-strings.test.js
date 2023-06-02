@@ -249,5 +249,11 @@ describe("String to Integer", () => {
         const expected = 0;
         const actual = stringToInteger(input);
         assert.strictEqual(actual, expected);
-    })
+    });
+    it("accounts for e numbers", () => {
+        const input = "   -115579378e25"
+        const expected = -115579378;
+        const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
 });

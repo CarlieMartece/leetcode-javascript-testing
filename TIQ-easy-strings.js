@@ -72,73 +72,30 @@ exports.validPalindrome = (s) => {
 };
 
 exports.stringToInteger = (s) => {
-  let minusSign = false;
-  let plusSign = false;
-  let preInput = true;
-  let postInput = false;
-  let isDecimal = false;
-  let digits = [];
   let i = 0;
-  while (postInput === false && i < s.length) {
-    let char = s.charAt(i);
-    if (/\s/.test(char)) {
-        if (preInput === false) {
-            postInput = true;
-        }
-    }
-    if (/[a-zA-Z]/.test(char)) {
-      if (preInput) {
+  let plusNeg = 1;
+  let digits = [];
+  let decPoints = 0;
+  s = s.trim();
+  if (s[i] === '-') plusNeg = -1;
+  if (s[i] === '-' || s[i] === "+") i++;
+  while (s[i] && /[0-9\.]/.test(s[i]) && decPoints <= 1) {
+    if (s[i] === '.') {
+      if (digits.length === 0) {
         return 0;
       } else {
-        postInput = true;
+        decPoints++;
+        if (decPoints < 1) digits.push(s[i]);
       }
     }
-    if (/\-/.test(char)) {
-        if (plusSign || minusSign) {
-            if (digits.length === 0) return 0;
-            postInput = true;
-        } else {
-            if (digits.length > 0) {
-                postInput = true;
-            } else {
-                minusSign = true;
-                preInput = false;
-            } 
-        }
-    }
-    if (/\+/.test(char)) {
-        if (plusSign || minusSign) {
-            if (digits.length === 0) return 0;
-            postInput = true;
-        } else {
-            if (digits.length > 0) {
-                postInput = true;
-            } else {
-                plusSign = true;
-                preInput = false;
-            } 
-        }
-    }
-    if (/\./.test(char)) {
-      if (preInput || isDecimal || digits.length === 0) {
-        return 0;
-      } else if (!isDecimal) {
-        digits.push(char);
-        isDecimal = true;
-      }
-    }
-    if (/[0-9]/.test(char)) {
-        preInput = false;
-        digits.push(char);
-    }
+    digits.push(s[i]);
     i++;
   }
-  let toNum = Number(digits.join(""));
-  if (minusSign) toNum = 0 - toNum;
+  let num = parseFloat(digits.join("")) * plusNeg;
   if (digits.length > 0) {
-    if (toNum >= 2 ** 31) return 2 ** 31 - 1;
-    if (toNum < 0 - 2 ** 31) return 0 - 2 ** 31;
-    return toNum;
+    if (num >= 2 ** 31) return 2 ** 31 - 1;
+    if (num <= 0 - 2 ** 31) return 0 - 2 ** 31;
+    return num;
   }
   return 0;
 };

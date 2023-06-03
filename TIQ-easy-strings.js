@@ -99,3 +99,8 @@ exports.stringToInteger = (s) => {
   }
   return 0;
 };
+
+exports.needleHaystack = (haystack, needle) => {
+  const index = haystack.indexOf(needle);
+  return index;
+}

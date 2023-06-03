@@ -6,7 +6,8 @@ const {
     firstUnique,
     validAnagram,
     validPalindrome,
-    stringToInteger
+    stringToInteger,
+    needleHaystack
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
@@ -254,6 +255,29 @@ describe("String to Integer", () => {
         const input = "   -115579378e25"
         const expected = -115579378;
         const actual = stringToInteger(input);
+        assert.strictEqual(actual, expected);
+    });
+});
+
+describe("needleHaystack", () => {
+    it("returns a number", () => {
+        const haystack = "x";
+        const needle = "y";
+        const actual = needleHaystack(haystack, needle);
+        assert.strictEqual(typeof(actual), 'number');
+    });
+    it("returns the index of the first occurence of needle in haystack", () => {
+        const haystack = "sadbutsad";
+        const needle = "sad";
+        const expected = 0;
+        const actual = needleHaystack(haystack, needle);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns minus one if needle is not present in haystack", () => {
+        const haystack = "leetcode";
+        const needle = "leeto";
+        const expected = -1;
+        const actual = needleHaystack(haystack, needle);
         assert.strictEqual(actual, expected);
     });
 });

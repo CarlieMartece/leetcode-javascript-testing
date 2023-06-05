@@ -7,7 +7,8 @@ const {
     validAnagram,
     validPalindrome,
     stringToInteger,
-    needleHaystack
+    needleHaystack,
+    longestCommonPrefix
 } = require("../TIQ-easy-strings");
 
 describe("Reverse String", () => {
@@ -259,7 +260,7 @@ describe("String to Integer", () => {
     });
 });
 
-describe("needleHaystack", () => {
+describe("Needle Haystack", () => {
     it("returns a number", () => {
         const haystack = "x";
         const needle = "y";
@@ -278,6 +279,26 @@ describe("needleHaystack", () => {
         const needle = "leeto";
         const expected = -1;
         const actual = needleHaystack(haystack, needle);
+        assert.strictEqual(actual, expected);
+    });
+});
+
+describe("Longest Common Prefix", () => {
+    it("returns a string", () => {
+        const input = [];
+        const actual = longestCommonPrefix(input);
+        assert.strictEqual(typeof(actual), 'string');
+    });
+    it("returns the longest common prefix in an array of strings", () => {
+        const input = ["cir","car"];
+        const expected = "c"
+        const actual = longestCommonPrefix(input);
+        assert.strictEqual(actual, expected);
+    });
+    it("returns an empty string if there's no common prefix", () => {
+        const input = ["dog","racecar","car"];
+        const expected = "";
+        const actual = longestCommonPrefix(input);
         assert.strictEqual(actual, expected);
     });
 });

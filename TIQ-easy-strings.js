@@ -106,41 +106,42 @@ exports.needleHaystack = (haystack, needle) => {
 };
 
 exports.longestCommonPrefix = (strs) => {
+  // if (strs.length === 0) return "";
+  // let min = Math.min.apply(Math, strs.map(function(str) { return str.length; }));
+  // let checkIndex = 0;
+  // for (let i = 1; i < strs.length; i++) {
+  //   let matching = true;
+  //   while (matching && checkIndex < min) {
+  //     if (strs[i].charAt(checkIndex) !== strs[0].charAt(checkIndex)) {
+  //       min = checkIndex;
+  //       checkIndex = 0;
+  //       matching = false;
+  //     } else {
+  //       checkIndex++;
+  //     }
+  //   }
+  // }
+  // return strs[0].slice(0, min);
+
   if (strs.length === 0) return "";
   let min = Math.min.apply(Math, strs.map(function(str) { return str.length; }));
-  let checkIndex = 0;
-  for (let i = 1; i < strs.length; i++) {
-    let matching = true;
-    while (matching && checkIndex < min) {
-      if (strs[i].charAt(checkIndex) !== strs[0].charAt(checkIndex)) {
-        min = checkIndex;
-        checkIndex = 0;
-        matching = false;
-      } else {
-        checkIndex++;
-      }
+  let charMap = {};
+  for (let i = 0; i <= min; i++) {
+    charMap[i] = [];
+  }
+  strs.forEach((str) => {
+    for (let i = 0; i <= min; i++) {
+      charMap[i].push(str.charAt(i));
+    }
+  });
+  let longestPref = 0;
+  for (index in charMap) {
+    const indexSet = new Set(charMap[index]);
+    if (indexSet.size > 1) {
+      return strs[0].slice(0, longestPref);
+    } else {
+      longestPref++;
     }
   }
-  return strs[0].slice(0, min);
-
-  // let min = Math.min.apply(Math, strs.map(function(str) { return str.length; }));
-  // let charMap = {};
-  // for (let i = 0; i <= min; i++) {
-  //   charMap[i] = [];
-  // }
-  // strs.forEach((str) => {
-  //   for (let i = 0; i <= min; i++) {
-  //     charMap[i].push(str.charAt(i));
-  //   }
-  // });
-  // let longestPref = 0;
-  // for (index in charMap) {
-  //   const indexSet = new Set(charMap[index]);
-  //   if (indexSet.size > 1) {
-  //     return strs[0].slice(0, longestPref);
-  //   } else {
-  //     longestPref++;
-  //   }
-  // }
-  // return strs[0].slice(0, longestPref);
+  return strs[0].slice(0, longestPref);
 };

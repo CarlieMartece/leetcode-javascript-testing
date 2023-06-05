@@ -4,7 +4,7 @@
   "description": "tech test practice",
   "main": "easy.js",
   "scripts": {
-    "test": "mocha __tests__"
+    "test": "mocha __tests__/TIQ-easy-linked-list.test.js"
   },
   "author": "Nooka Coder",
   "license": "none",
